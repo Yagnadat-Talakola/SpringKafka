@@ -1,4 +1,4 @@
-package com.talakola.kafka.consumet;
+package com.talakola.kafka.consumer;
 
 import com.talakola.kafka.config.KafkaConsumerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
