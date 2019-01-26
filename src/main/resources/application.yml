@@ -1,0 +1,17 @@
+spring:
+  profiles.active: local
+
+---
+spring:
+  profiles: local
+kafka:
+  consumer:
+    stock:
+      consumerBootstrapServers: localhost:9092
+      topic: stock-data
+      autoOffsetReset: earliest
+      maxPollRecords: 1000
+      keyDeserializer: com.apache.kafka.common.serialization.SpringDeserializer
+      valueDeserializer: com.apache.kafka.common.serialization.SpringDeserializer
+      groupId: test-consumer-1
+
