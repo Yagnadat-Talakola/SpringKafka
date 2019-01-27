@@ -4,17 +4,16 @@ spring:
 ---
 spring:
   profiles: local
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      autoCommit: false
+      driverClassName: org.postgresql.Driver
+      jdbcUrl: "jdbc:postgresql://localhost:5432/SupplyChainData"
+      username: postgres
+      maximumPoolSize: 10
+      connectionTimeout: 60000
 kafka:
-  consumer:
-    stock:
-      topic: stock-data
-      consumerBootstrapServers: localhost:9092
-      autoOffsetReset: earliest
-      maxPollRecords: 1000
-      keyDeserializer: com.apache.kafka.common.serialization.StringDeserializer
-      valueDeserializer: com.apache.kafka.common.serialization.StringDeserializer
-      groupId: test-consumer-1
-
   producer:
     stock:
       bootstrapServers: localhost:9092
@@ -23,19 +22,10 @@ kafka:
       batchSize: 0
       lingerms: 2
       maxInflightConnections: 1
-      topic: stock-data
+      topic: stock-data-1
       keySerializer: com.apache.kafka.common.serialization.StringSerializer
       valueSerializer: com.apache.kafka.common.serialization.StringSerializer
 
-  datasoure:
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      autoCommit: false
-      driverClassName: org.postgres.Driver
-      jdbcUrl: "jdbc:postgresql://localhost:5432/SupplyChainData"
-      username: postgres
-      maximumPoolSize: 10
-      connectionTimeout: 60000
 
 
 
