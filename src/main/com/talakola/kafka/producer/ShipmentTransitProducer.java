@@ -1,5 +1,7 @@
 package com.talakola.kafka.producer;
 
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.annotation.Timed;
 import com.google.gson.Gson;
 import com.talakola.kafka.model.ShipmentTransitModel;
 import com.talakola.kafka.service.ShipmentTransitService;
@@ -20,6 +22,9 @@ public class ShipmentTransitProducer {
     @Autowired
     KafkaMessageSender kafkaMessageSender;
 
+    @Autowired
+    MetricRegistry metricRegistry;
+
     public void produce() {
         Gson gson = new Gson();
         List<ShipmentTransitModel> transitList = shipmentTransitService.getAllTransits();
@@ -27,7 +32,14 @@ public class ShipmentTransitProducer {
         logger.info("beginning to send");
         transitList.stream().forEach(transit -> {
             String json = gson.toJson(transit);
+            metricRegistry.counter("transit").inc();
             kafkaMessageSender.send(json);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
         });
         logger.info("Sent successfully");
 //        System.out.println("sent successfully");
