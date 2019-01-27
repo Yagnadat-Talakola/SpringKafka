@@ -1,9 +1,11 @@
 
 ## Spring-Kafka Demonstration Project
 
-* Consume from Apache Kafka topics and persist to MongoDB after processing.
-* Used SpringBoot, SpringKafka and MongoDB
+#### Project Features:
+* Published [SupplyChain-Tracker's Shipment-Transit data](https://github.com/Yagnadat-Talakola/SupplyChain-Tracker) to a Kafka topic.
+* Used time-series database (Graphite) to store metrics related to application performance.
+* Used time-series analytics software (Grafana) to render rich visual metrics stored in Graphite database.
 
-#### Kafka commands:
- * to create a topic: ./kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 5 --topic stock-data
- *
+#### Todo:
+* Consume from Kafka topic and persist to a SQL database and NoSql database.
+
